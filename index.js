@@ -7,7 +7,7 @@ const screens = [
   {
     title: "Chromaterra — Profile My Atlas (Desktop)",
     desc: "Signed-in user view showing generated locales across New Orleans, the Azores, Los Angeles, and Ireland — each with an extracted palette and the option ,to share to the public atlas.",
-    src: "img/user-atlas-page.png",
+    src: "img/updated-garden-district-thumb.png",
   },
   {
     title: "Chromaterra — Landing Page (Mobile)",
