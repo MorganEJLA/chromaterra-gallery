@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chromaterra — Case Study</title>
+
+    <meta property="og:title" content="Chromaterra — Case Study" />
+    <meta
+      property="og:description"
+      content="A personal React web app that turns travel photos into color palettes. Built with React 19, Firebase, and the Claude API."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://morganejla.github.io/chromaterra-case-study/"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Manrope:wght@200..800&family=Syne:wght@400..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="wrap topbar__inner">
+        <a class="brand" href="#">
+          <span class="brand__title">Chromaterra</span>
+          <span class="brand__tag">Case Study</span>
+        </a>
+        <nav class="topnav" aria-label="Primary">
+          <a class="topnav__link" href="#gallery">Screens</a>
+          <a class="topnav__link" href="#about">About</a>
+          <a
+            class="btn btn--accent"
+            href="https://chromaterra.vercel.app/"
+            target="_blank"
+            rel="noreferrer"
+            >Live Site</a
+          >
+          <a
+            class="btn btn--ghost cs-nav-back"
+            href="https://morganjonesdev.com"
+          >
+            Portfolio</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero hero--cs">
+        <div class="wrap hero__inner">
+          <div class="hero__copy">
+            <p class="cs-kicker">Case Study · 2026</p>
+            <h1>Chromaterra</h1>
+            <p class="lede">
+              A personal React web app that turns travel photos into color
+              palettes. Every place has a palette. Chromaterra extracts it,
+              names it, and saves it to your atlas.
+            </p>
+            <div class="hero__actions">
+              <a
+                class="btn btn--primary"
+                href="https://chromaterra.vercel.app/"
+                target="_blank"
+                rel="noreferrer"
+                >View Live Site</a
+              >
+              <a class="btn btn--ghost" href="#gallery">Browse Screens</a>
+            </div>
+          </div>
+
+          <div class="hero-meta-row">
+            <div class="hero-meta-item">
+              <span class="meta-label">Platform</span>
+              <span class="meta-value">Web</span>
+            </div>
+            <div class="hero-meta-item">
+              <span class="meta-label">Stack</span>
+              <span class="meta-value">React 19 · Firebase · Claude API</span>
+            </div>
+            <div class="hero-meta-item">
+              <span class="meta-label">Status</span>
+              <span class="meta-value">Live</span>
+            </div>
+            <div class="hero-meta-item">
+              <span class="meta-label">Accessibility</span>
+              <span class="meta-value">WCAG 2AA · Zero Errors</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 01 ORIGIN -->
+      <section class="cs-section">
+        <div class="wrap">
+          <span class="cs-num">01 · Origin</span>
+          <h2>Two Practices, One Tool</h2>
+          <p>
+            I make art with paper, quilling in particular — the tight rolling of
+            thin strips of paper into shapes and designs. Color is a huge part
+            of the work, and I often find myself pulling colors from photos of
+            places I've traveled to use as reference. But the process of
+            extracting and organizing those colors was a pain, and I wanted a
+            more streamlined choice. I'd been using Shutterstock palette tools
+            for years, but I wanted something more specfic to my tastes and
+            interests. What I actually wanted was color pulled from places I
+            know by heart and places I dream of visiting. I wanted to recreate
+            the feeling of a place through its colors, like the greens of São
+            Miguel in the Açores, the haint blue porch ceilings and faded coral
+            shotguns of Bywater.
+          </p>
+          <p>
+            The idea was simple: upload photos from places you've been and
+            extract a palette you can actually use. I tested the concept with
+            TripAdvisor photos organized into albums by city, island, and
+            region. It worked well enough that I started using one of the
+            palettes in an active quilling project before I'd finished building
+            the app.
+          </p>
+          <p>
+            Chromaterra became the project where my life as a visual artist and
+            my work as a developer converged. It's a tool I built for myself
+            that turned into a study in React architecture, API security,
+            Firebase auth, and accessibility.
+          </p>
+
+          <div class="swatch-strip">
+            <span style="background: #f0ede6"></span>
+            <span style="background: #5ab8a8"></span>
+            <span style="background: #c8503a"></span>
+            <span style="background: #1a1a18"></span>
+            <span style="background: #c8882a"></span>
+            <span style="background: #f5f1e8"></span>
+            <span style="background: #3a3a3a"></span>
+            <span style="background: #6b8e6f"></span>
+            <span style="background: #d4a5a0"></span>
+            <span style="background: #7fccd4"></span>
+          </div>
+          <p class="swatch-strip-label">
+            French Quarter and Garden District palettes, locales generated in
+            the app.
+          </p>
+        </div>
+      </section>
+
+      <!-- 02 TECHNICAL -->
+      <section class="cs-section">
+        <div class="wrap">
+          <span class="cs-num">02 · Technical</span>
+          <h2>Building the Architecture</h2>
+          <p>
+            The most consequential decision in this project was security. The
+            original build called the Anthropic API directly from the client —
+            which meant the API key was exposed in the browser. Fixing that
+            meant building a Vercel serverless proxy to sit between the client
+            and the API, with CORS locked to the production domain. That one
+            change reframed how I think about third-party API integration
+            entirely.
+          </p>
+          <p>
+            Component organization followed the same instinct toward structure.
+            The original flat component directory was reorganized into
+            subdirectories — <code class="inline">buttons/</code>,
+            <code class="inline">modals/</code>,
+            <code class="inline">panels/</code>,
+            <code class="inline">layout/</code>,
+            <code class="inline">icons/</code> — and inline styles were replaced
+            with CSS Modules across the board. Firebase auth was reverted from
+            <code class="inline">signInWithRedirect</code> to
+            <code class="inline">signInWithPopup</code> after cross-browser
+            issues surfaced in testing.
+          </p>
+          <p>
+            A Pa11y WCAG 2AA audit found contrast violations across several
+            components. All were resolved — the final audit returned zero
+            errors.
+          </p>
+
+          <table class="cs-table">
+            <tr>
+              <td>Framework</td>
+              <td>React 19 + Vite</td>
+            </tr>
+            <tr>
+              <td>Language</td>
+              <td>JavaScript</td>
+            </tr>
+            <tr>
+              <td>AI</td>
+              <td>Claude API via Vercel serverless proxy</td>
+            </tr>
+            <tr>
+              <td>Auth & DB</td>
+              <td>Firebase (Google Auth + Firestore)</td>
+            </tr>
+            <tr>
+              <td>Styling</td>
+              <td>CSS Modules</td>
+            </tr>
+            <tr>
+              <td>Accessibility</td>
+              <td>Pa11y · WCAG 2AA · Zero errors</td>
+            </tr>
+            <tr>
+              <td>Hosting</td>
+              <td>Vercel</td>
+            </tr>
+            <tr>
+              <td>Security</td>
+              <td>Serverless proxy · CORS locked · No client-side API key</td>
+            </tr>
+          </table>
+
+          <div class="cs-callout">
+            <h3>Key Lesson</h3>
+            <p>
+              Exposing an API key in the client is an easy mistake when moving
+              fast on a personal project. Building the serverless proxy was a
+              security fix.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 FEATURES -->
+      <section class="cs-section">
+        <div class="wrap">
+          <span class="cs-num">03 · Features</span>
+          <h2>What It Does</h2>
+
+          <ul class="cs-features">
+            <li>
+              <span class="cs-feature-name">AI Palette Generation</span>
+              <span class="cs-feature-desc"
+                >The Claude API analyzes location-based imagery and returns a
+                named, curated color palette — not just hex codes, but colors
+                with context and a gradient built from the scene.</span
+              >
+            </li>
+            <li>
+              <span class="cs-feature-name">Font Pairing</span>
+              <span class="cs-feature-desc"
+                >Each generated locale includes AI-suggested font pairings
+                derived from the mood and visual character of the uploaded
+                photos.</span
+              >
+            </li>
+            <li>
+              <span class="cs-feature-name">Personal Atlas</span>
+              <span class="cs-feature-desc"
+                >Palettes are saved to a personal collection via Firebase
+                Firestore, organized by region and area, tied to a Google Auth
+                account.</span
+              >
+            </li>
+            <li>
+              <span class="cs-feature-name">Gradient Builder</span>
+              <span class="cs-feature-desc"
+                >Each locale detail view includes a gradient tool built from the
+                extracted palette colors.</span
+              >
+            </li>
+            <li>
+              <span class="cs-feature-name">Responsive Layout</span>
+              <span class="cs-feature-desc"
+                >Full desktop and mobile layouts across landing, locale detail,
+                profile, and atlas views.</span
+              >
+            </li>
+            <li>
+              <span class="cs-feature-name">WCAG 2AA Accessible</span>
+              <span class="cs-feature-desc"
+                >Full Pa11y audit completed. All contrast values meet AA
+                standards. Zero violations on final pass.</span
+              >
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 04 WHAT'S NEXT -->
+      <section class="cs-section">
+        <div class="wrap">
+          <span class="cs-num">04 · What's Next</span>
+          <h2>The Road Ahead</h2>
+          <p>
+            Chromaterra began as a personal color tool and became a study in
+            production-grade React development. The next phase is about
+            deepening the personal use case — bringing in real travel
+            photography and building toward something usable as a daily artist
+            reference.
+          </p>
+
+          <div class="cs-roadmap">
+            <div class="cs-roadmap-item">
+              <span class="cs-roadmap-num">01</span>
+              <div class="cs-roadmap-content">
+                <h3>Own Photography Upload</h3>
+                <p>
+                  The original vision: upload your own travel photos, not pulled
+                  reference imagery. A direct upload flow with Firebase Storage
+                  would complete the personal use case.
+                </p>
+              </div>
+            </div>
+            <div class="cs-roadmap-item">
+              <span class="cs-roadmap-num">02</span>
+              <div class="cs-roadmap-content">
+                <h3>Album Organization</h3>
+                <p>
+                  Group palettes by trip, region, or project. A single Azores
+                  trip might generate a dozen palettes that need to live
+                  together for quilling reference.
+                </p>
+              </div>
+            </div>
+            <div class="cs-roadmap-item">
+              <span class="cs-roadmap-num">03</span>
+              <div class="cs-roadmap-content">
+                <h3>Palette Export Formats</h3>
+                <p>
+                  Export as ASE (Adobe Swatch Exchange), CSS custom properties,
+                  or a PNG swatch sheet — so palettes move directly into design
+                  tools without manual re-entry.
+                </p>
+              </div>
+            </div>
+            <div class="cs-roadmap-item">
+              <span class="cs-roadmap-num">04</span>
+              <div class="cs-roadmap-content">
+                <h3>TypeScript Migration</h3>
+                <p>
+                  The project is currently in JavaScript. A TypeScript migration
+                  would enforce the data model and close the gap toward more
+                  structured codebases.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DIVIDER INTO GALLERY -->
+      <div class="cs-divider">
+        <div class="wrap">
+          <span class="cs-divider-label">05 · Screens</span>
+          <h2>Screen Gallery</h2>
+          <p>
+            A curated walkthrough of the app: landing page, atlas view, locale
+            generation, palette detail, and user profile.
+          </p>
+        </div>
+      </div>
+
+      <!-- GALLERY -->
+      <section class="section cs-section--wide" id="gallery">
+        <div class="wrap">
+          <div class="controls" role="search" style="margin-bottom: 1.5rem">
+            <label class="sr-only" for="search">Search screens</label>
+            <input
+              id="search"
+              type="search"
+              placeholder="Search screens"
+              autocomplete="off"
+            />
+          </div>
+          <div id="grid" class="grid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="section section--soft" id="about">
+        <div class="wrap about">
+          <div>
+            <h2>About Chromaterra</h2>
+            <p>
+              Chromaterra is a personal project built with React. The idea came
+              from wanting a way to document the visual identity of places I've
+              traveled — not just photos, but the actual colors. You upload
+              reference images from a location, and the app uses AI to extract a
+              named color palette, suggest font pairings, and build a gradient
+              from the scene. Each palette is saved to your personal atlas,
+              organized by region and area.
+            </p>
+            <p>
+              This gallery is a static snapshot of the UI as it currently
+              stands.
+            </p>
+          </div>
+
+          <div class="about__callout">
+            <p class="about__label">Palette</p>
+            <div class="about__swatches">
+              <span
+                class="swatch"
+                style="background: #c8a84b"
+                title="Mustard Gold"
+              ></span>
+              <span
+                class="swatch"
+                style="background: #7a3e28"
+                title="Sienna Brown"
+              ></span>
+              <span
+                class="swatch"
+                style="background: #2d5a3d"
+                title="Forest Green"
+              ></span>
+              <span
+                class="swatch"
+                style="background: #5b8fa8"
+                title="Steel Blue"
+              ></span>
+              <span
+                class="swatch"
+                style="background: #4a8b8c"
+                title="Azorean Teal"
+              ></span>
+              <span
+                class="swatch"
+                style="background: #c4673a"
+                title="Terracotta"
+              ></span>
+              <span
+                class="swatch"
+                style="background: #7b1c2a"
+                title="Deep Crimson"
+              ></span>
+              <span
+                class="swatch"
+                style="background: #d4b84a"
+                title="Ochre"
+              ></span>
+            </div>
+            <p class="about__hint">
+              Colors pulled from real places — Azorean greens, volcanic stone,
+              Atlantic mist, and terracotta from the road.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <div class="lightbox__backdrop" data-close="true"></div>
+      <div
+        class="lightbox__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Screenshot preview"
+      >
+        <button
+          class="lightbox__close"
+          type="button"
+          aria-label="Close"
+          data-close="true"
+        >
+          ✕
+        </button>
+        <div class="lightbox__head">
+          <div>
+            <p class="lightbox__kicker" id="lbKicker">
+              Personal Project — React Web App
+            </p>
+            <h3 class="lightbox__title" id="lbTitle">Title</h3>
+          </div>
+          <a
+            class="btn btn--accent"
+            id="lbOpen"
+            href=""
+            target="_blank"
+            rel="noreferrer"
+            >Open Full Size</a
+          >
+        </div>
+        <img id="lbImg" src="" alt="" />
+        <p class="lightbox__desc" id="lbDesc"></p>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <p>© <span id="year"></span> Morgan Jones — Chromaterra</p>
+        <p class="footer__muted">
+          <a href="https://morganjonesdev.com" style="color: inherit">
+            Back to Portfolio</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <script src="index.js"></script>
+  </body>
+</html>
