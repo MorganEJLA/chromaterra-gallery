@@ -40,7 +40,7 @@ The case study covers:
 
 - **Case Study:** _(add GitHub Pages URL)_
 - **App:** [chromaterra.vercel.app](https://chromaterra.vercel.app)
-- **App Repo:** [MorganEJLA/chromaterra](https://github.com/MorganEJLA/chromaterra)
+- **App Repo:** [MorganEJLA/travel-color-palette](https://github.com/MorganEJLA/travel-color-palette)
 
 ---
 
