@@ -5,6 +5,11 @@ const screens = [
     src: "img/chromaterra-landing_public_desktop.png",
   },
   {
+    title: "Chromaterra — Profile My Atlas (Desktop)",
+    desc: "Signed-in user view showing generated locales across New Orleans, the Azores, Los Angeles, and Ireland — each with an extracted palette and the option ,to share to the public atlas.",
+    src: "img/user-atlas-page.png",
+  },
+  {
     title: "Chromaterra — Landing Page (Mobile)",
     desc: "Mobile layout of the public landing page, maintaining typographic hierarchy and responsive structure.",
     src: "img/chromaterra-landing_public_mobile.png",
@@ -18,23 +23,19 @@ const screens = [
   {
     title: "Locale Detail — Mobile",
     desc: "Mobile-optimized locale detail page with accessible layout for palette exploration on small screens.",
-    src: "img/chromaterra-locale_detailmobile.png",
+    src: "img/garden-district-mobile.png",
   },
   {
     title: "Generate New Locale",
     desc: "Form interface for generating a locale palette — name input, font mood selector, and reference image upload.",
-    src: "img/chromaterra-generated-palette.png",
+    src: "img/garden-district-thumb.png",
   },
   {
     title: "Generated Locale Results",
     desc: "Post-generation view showing the extracted palette, gradient builder, and font pairings derived from uploaded photos.",
     src: "img/chromaterra-generated-profile-add-results.png",
   },
-  {
-    title: "Profile — Generated Palettes",
-    desc: "User profile page displaying saved locale palettes with color swatches, color names, and atlas sharing options.",
-    src: "img/chromaterra-generated-profile-addition.png",
-  },
+
   {
     title: "Profile — Palette Thumbnails",
     desc: "Compact palette thumbnail view on the signed-in profile, showing locale count and generated color sets.",

@@ -517,7 +517,7 @@ h1 {
 .lightbox__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(92, 37, 37, 0.72);
+  background: var(--color-vision-tower);
 }
 
 .lightbox__panel {
@@ -529,6 +529,8 @@ h1 {
   border-radius: 20px;
   box-shadow: var(--shadow);
   padding: 1rem;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .lightbox__head {
